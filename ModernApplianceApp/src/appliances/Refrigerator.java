@@ -6,7 +6,7 @@ public class Refrigerator extends Appliance{
 	private int width;
 	private int height;
 	//constructor
-	public Refrigerator(int itemNumber, String brand, int quantity, int wattage, String color, Double price, int numberOfDoors, int width, int height) {
+	public Refrigerator(String itemNumber, String brand, int quantity, int wattage, String color, Double price, int numberOfDoors, int width, int height) {
 		super(itemNumber, brand, quantity, wattage, color, price);
 		this.setNumberOfDoors(numberOfDoors);
 		this.setWidth(width);

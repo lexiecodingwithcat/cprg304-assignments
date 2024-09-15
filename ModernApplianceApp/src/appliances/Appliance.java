@@ -1,8 +1,8 @@
 package appliances;
-import java.util.Scanner;
+
 
 public abstract class Appliance {
-  private int itemNumber;
+  private String itemNumber;
   private String brand;
   private int quantity;
   private int wattage;
@@ -10,10 +10,10 @@ public abstract class Appliance {
   private Double price;
   
   //getters and setters
-  public int getItemNumber() {
+  public String getItemNumber() {
 	  return itemNumber;
   }
-  public void setItemNumber(int number) {
+  public void setItemNumber(String number) {
 	  this.itemNumber = number;
   }
   public String getBrand() {
@@ -48,7 +48,7 @@ public abstract class Appliance {
 	  this.price = price;
   }
   //constructor
-  public Appliance(int itemNumber, String brand, int quantity,int wattage, String color,Double price)
+  public Appliance(String itemNumber, String brand, int quantity,int wattage, String color,Double price)
   {
 	  this.itemNumber = itemNumber;
 	  this.brand = brand;
@@ -57,5 +57,8 @@ public abstract class Appliance {
 	  this.color = color;
 	  this.price = price;
   }
+  
+
+
   
 }
