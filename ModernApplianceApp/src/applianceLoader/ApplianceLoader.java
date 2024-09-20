@@ -1,7 +1,11 @@
 package applianceLoader;
 
+
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,9 +22,6 @@ public class ApplianceLoader {
 		// and null cannot use .add
 	public List<Appliance> appliances = new ArrayList<>();
 	
-	
-	
-	
 	public List<Appliance> loadAppliances(){
 	File inputFile = new File("res/appliances.txt");
 	Scanner input = null;
@@ -28,6 +29,7 @@ public class ApplianceLoader {
 		input = new Scanner(inputFile);
 		while(input.hasNext()) {
 			String line = input.nextLine();
+			line = line.trim();
 			String[] elements = line.split(";");
 			String itemNumber = elements[0];
 			String brand = elements[1];
@@ -70,10 +72,28 @@ public class ApplianceLoader {
 		}
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
+	}catch (NumberFormatException e) {
+	        System.err.println("Number format error: " + e.getMessage());
+	    
 	}finally {
 		input.close();
 	}
 	return appliances;
 	}
+	
+	
+	public void saveList(List<Appliance> edittedAppliances) {
+	try (FileWriter fileWriter = new FileWriter("res/appliances.txt");
+			BufferedWriter bfWriter = new BufferedWriter(fileWriter)) {
+		for(Appliance appliance: edittedAppliances) {
+			bfWriter.write(appliance.saveToString());
+			bfWriter.newLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {}
+	}
+	
+	
 
 }

@@ -31,4 +31,36 @@ public class Refrigerator extends Appliance{
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	
+	@Override
+	public String saveToString() {
+		return String.format(
+	            "%s;%s;%d;%d;%s;%.2f;%d;%d;%d",
+	            getItemNumber(),
+	            getBrand(),
+	            getQuantity(),
+	            getWattage(),
+	            getColor(),
+	            getPrice(),
+	            getNumberOfDoors(),
+	            getWidth(),
+	            getHeight()
+	            
+	        );
+	}
+	@Override
+	public String toString() {
+		String information = "ItemNumber:" + " "+ getItemNumber() + "\n"
+				+ "Brand:" + " "+ getBrand() +"\n" 
+				+ "Quantity:"+ " "+ getQuantity()+ "\n" 
+				+ "Wattage:"+ " "+getWattage()+ "\n"
+				+ "Color:" + " "+ getColor()+ "\n"
+				+"Price:" + " "+ getPrice() + "\n"
+				+ "NumberofDoors:"+ " " + numberOfDoors + "\n"
+				+ "Width:" + " "+ width + "\n"
+				+"Height:" + " "+height + "\n";
+		
+		return information ;
+	}
+	
 }

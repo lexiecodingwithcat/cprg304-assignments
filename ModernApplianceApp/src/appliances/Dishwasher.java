@@ -22,5 +22,36 @@ private String soundRating;
 	public void setFeature(String feature) {
 		this.feature = feature;
 	}
+	
+	@Override
+	public String saveToString() {
+		return String.format(
+	            "%s;%s;%d;%d;%s;%.2f;%s;%s",
+	            getItemNumber(),
+	            getBrand(),
+	            getQuantity(),
+	            getWattage(),
+	            getColor(),
+	            getPrice(),
+	            getFeature(),
+	            getSoundRating()
+	        );
+	}
+	
+	@Override
+	public String toString() {
+		String information = "ItemNumber:"+ " " + getItemNumber() + "\n"
+	+ "Brand:"+ " " + getBrand() +"\n" 
+	+ "Quantity:"+ " "+ getQuantity()+ "\n" 
+	+ "Wattage:"+ " "+getWattage()+ "\n"
+	+ "Color:" + " "+ getColor()+ "\n"
+	+"Price:" + " "+ getPrice() + "\n"
+	+"Feature:" + " "+ feature + "\n"
+	+ "SoundRating:"+ " " + soundRating + "\n";
+		
+		return information ;
+	}
+	
+	
 
 }

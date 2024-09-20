@@ -21,4 +21,32 @@ public char getRoomType() {
 public void setRoomType(char roomType) {
 	this.roomType = roomType;
 }
+
+@Override
+public String saveToString() {
+		return String.format(
+	            "%s;%s;%d;%d;%s;%.2f;%.1f;%c",
+	            getItemNumber(),
+	            getBrand(),
+	            getQuantity(),
+	            getWattage(),
+	            getColor(),
+	            getPrice(),
+	            getCapacity(),
+	            getRoomType()
+	        );
+	}
+
+@Override
+public String toString() {
+	String information = "ItemNumber:" + " "+ getItemNumber() + "\n"
+	+ "Brand:" + " "+ getBrand() +"\n" 
+	+ "Quantity:"+ " "+ getQuantity()+ "\n" 
+	+ "Wattage:"+ " "+getWattage()+ "\n"
+	+ "Color:"+ " " + getColor()+ "\n"
+	+"Price:" + " "+ getPrice() + "\n"
+	+ "Capacity:"+ " "+ capacity + "\n"
+	+"RoomType:"+ " " + roomType + "\n";
+	return information ;
+}
 }

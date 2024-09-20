@@ -2,12 +2,12 @@ package appliances;
 
 
 public abstract class Appliance {
-  private String itemNumber;
-  private String brand;
-  private int quantity;
-  private int wattage;
-  private String color;
-  private Double price;
+  protected String itemNumber;
+  protected String brand;
+  protected int quantity;
+  protected int wattage;
+  protected String color;
+  protected Double price;
   
   //getters and setters
   public String getItemNumber() {
@@ -57,6 +57,7 @@ public abstract class Appliance {
 	  this.color = color;
 	  this.price = price;
   }
+public abstract String saveToString();
   
 
 
