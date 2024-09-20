@@ -1,5 +1,5 @@
-189360200;Bosch;174;60;black;2000.00;2;62;29
-535981394;Tefal;90;700;bronze;320.00;Third Rack;Qt
+189360200;Bosch;173;60;black;2000.00;2;62;29
+535981394;Tefal;89;700;bronze;320.00;Third Rack;Qt
 516089502;Hoover;240;1200;silver;250.00;Finger Print Resistant;Qr
 255131796;Black & Decker;55;1500;white;500.00;Residential;18
 254565387;Miele;86;1000;grey;800.00;Commercial;24

@@ -1,4 +1,6 @@
 
+package app;
+
 import manager.ApplianceManager;
 
 public class ModernApplianceApp {
