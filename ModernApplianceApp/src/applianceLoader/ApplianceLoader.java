@@ -16,12 +16,32 @@ import appliances.Vacuum;
 import appliances.Microwave;
 import appliances.Dishwasher;
 
-//class to load the list of different appliances
+/** 
+ * The {@code ApplianceLoader} class is responsible for loading and saving a list of {@code Appliance}
+ * objects from/to a text file.
+ * @author Tianzi Cui
+ * @since 2024-09-19
+ */
 public class ApplianceLoader {
-	//we must initialize the list. otherwise it will point to null
-		// and null cannot use .add
+	
+	/** A list to store all loaded appliance
+	 * It is initialized as an empty list to avoid null pointer exceptions.
+	 */
 	public List<Appliance> appliances = new ArrayList<>();
 	
+	/** 
+     * Loads appliances from the file "res/appliances.txt".
+     * <p>
+     * This method reads each line from the file, splits it based on the semicolon (";")
+     * delimiter, and converts the data into corresponding {@code Appliance} objects. 
+     * The first character of the item number determines the type of the appliance.
+     * </p>
+     * 
+     * @return a list of {@code Appliance} objects loaded from the file
+     * 
+     * @throws FileNotFoundException if the specified file does not exist
+     * @throws NumberFormatException if there is an error in parsing numerical data (e.g. integers, doubles)
+     */ 
 	public List<Appliance> loadAppliances(){
 	File inputFile = new File("res/appliances.txt");
 	Scanner input = null;
@@ -81,6 +101,17 @@ public class ApplianceLoader {
 	return appliances;
 	}
 	
+	 /**
+     * Saves a list of {@code Appliance} objects to the file "res/appliances.txt".
+     * <p>
+     * Each appliance is converted to a formatted string using its {@code saveToString()} 
+     * method, and written to the file with each appliance on a new line.
+     * </p>
+     * 
+     * @param edittedAppliances the list of appliances to save to the file
+     * 
+     * @throws IOException if an I/O error occurs during writing
+     */
 	
 	public void saveList(List<Appliance> edittedAppliances) {
 	try (FileWriter fileWriter = new FileWriter("res/appliances.txt");

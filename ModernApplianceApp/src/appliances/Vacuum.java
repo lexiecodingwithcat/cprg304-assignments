@@ -1,5 +1,13 @@
 package appliances;
-
+/**
+ * The {@code Vacuum} class represents a specific type of appliance that extends the {@code Appliance} class.
+ * It adds additional attributes for grade and battery voltage, providing methods to manipulate and display 
+ * those attributes. This class overrides the {@code saveToString} method to format the data for file storage.
+ * Also overrides the {@code toString} method to make sure the format when printing out.
+ * 
+ * @author Tianzi Cui
+ * @since 2024-09-19
+ */
 public class Vacuum extends Appliance{
 	private String grade;
 	private int batteryVoltage;

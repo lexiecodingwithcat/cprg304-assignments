@@ -1,6 +1,12 @@
 package appliances;
 
-
+/**
+ * The {@code Appliance} class is an abstract class of other specific devices.
+ * It contains common attributes itemNumber, brand, quantity, wattage, color and price.
+ * 
+ * @author Tianzi Cui
+ * @since 2024-09-19
+ */
 public abstract class Appliance {
   protected String itemNumber;
   protected String brand;
@@ -9,7 +15,7 @@ public abstract class Appliance {
   protected String color;
   protected Double price;
   
-  //getters and setters
+ 
   public String getItemNumber() {
 	  return itemNumber;
   }
@@ -47,7 +53,7 @@ public abstract class Appliance {
   public void setPrice(Double price) {
 	  this.price = price;
   }
-  //constructor
+  
   public Appliance(String itemNumber, String brand, int quantity,int wattage, String color,Double price)
   {
 	  this.itemNumber = itemNumber;

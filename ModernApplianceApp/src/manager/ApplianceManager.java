@@ -11,7 +11,16 @@ import appliances.Dishwasher;
 import appliances.Microwave;
 import appliances.Refrigerator;
 import appliances.Vacuum;
-
+/**
+ * The {@code ApplianceManager} class is responsible for managing a collection of appliances,
+ * including displaying a user menu, and processing user requests to check out appliances, find appliances by brand, display appliances by type,
+ * and produce a random list of appliances.
+ * 
+ * <p>This class utilizes an {@code ApplianceLoader} to load and save appliance data.</p>
+ * 
+ * @author Tianzi Cui
+ * @since 2024-09-19
+ */
 public class ApplianceManager {
 	
 	public  List<Appliance> loadedAppliances = new ArrayList<>();
@@ -19,19 +28,27 @@ public class ApplianceManager {
 	private Scanner scanner;
 	private boolean keepShowingMenu = true;
 	private int applianceLength;
-	
+/**
+* Constructs a new {@code ApplianceManager} instance, initializing the scanner
+* and loading appliances from the file.
+* */
 	public ApplianceManager() {
 		this.scanner = new Scanner(System.in);
 		loadAppliances();
 	}
 	
-	public void loadAppliances() {
+/**
+* Loads appliances from the file using the {@code ApplianceLoader}.
+*/
+public void loadAppliances() {
 		
 		loadedAppliances = loader.loadAppliances();
 		applianceLength = loadedAppliances.size();
 	}
-	
-	public void displayMenu() {
+/**
+ * Displays the main menu and processes user input to perform different actions based on it.
+ */
+public void displayMenu() {
 		while(keepShowingMenu) {
 		System.out.println("\n");
 		System.out.println("Welcome to modern appliances!");
@@ -63,14 +80,16 @@ public class ApplianceManager {
 		
 		}
 	}
-	//checkout method
+
+
+/**
+ * Checks out an appliance based on the user's input item number.
+ */
 	public void checkoutAppliance() {
-//		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the item number of an appliance:");
 		String inputItemNumber = scanner.next();
 		boolean founded = false;
 		for(Appliance appliance: loadedAppliances) {
-//			System.out.println(appliance.getItemNumber());
 			if(inputItemNumber.equals(appliance.getItemNumber())) {
 				 founded = true;
 				int quantity = appliance.getQuantity();
@@ -79,8 +98,7 @@ public class ApplianceManager {
 					System.out.println("Appliance " + "\""+ inputItemNumber+"\"" +" has been checked out." );
 				}
 				else {
-					System.out.println("The appliance is not available to be checked out.");
-					
+					System.out.println("The appliance is not available to be checked out.");	
 				}
 			}
 		}
@@ -90,7 +108,9 @@ public class ApplianceManager {
 		
 	}
 	
-	//find appliances by brand 
+	/**
+     * Finds and displays appliances based on brand.
+     */
 	public void findApplianceByBrand() {
 		System.out.println("Enter brand to search for:" );
 		boolean found = false;
@@ -108,7 +128,9 @@ public class ApplianceManager {
 		
 	}
 	
-	//display information by types
+/**
+* Displays appliances based on their type, allowing the user to specify additional filters based on the appliance's attributes.
+*/
 	public void displayApplianceByType() {
 		System.out.println("Appliance Types \n"
 				+ "1 – Refrigerators \n"
@@ -198,7 +220,10 @@ public class ApplianceManager {
 			break;	
 	}
 }
-	//produce random appliance list
+	
+/**
+* Produces and displays a random list of appliances based on user input.
+*/
 	public void randomApplianceList() {
 		System.out.println("Enter number of appliances: ");
 		int inputNumber = scanner.nextInt();
@@ -217,7 +242,9 @@ public class ApplianceManager {
 	}
 	
 
-	//save & exit 
+/**
+* Saves the current list of appliances and exits the application.
+*/
 	public void saveAndExit() {
 		//write back the list to file
 		loader.saveList(loadedAppliances);
