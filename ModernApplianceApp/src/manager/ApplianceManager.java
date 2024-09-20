@@ -33,7 +33,7 @@ public class ApplianceManager {
 	
 	public void displayMenu() {
 		while(keepShowingMenu) {
-//		Scanner scanner = new Scanner(System.in);
+		System.out.println("\n");
 		System.out.println("Welcome to modern appliances!");
 		System.out.println("How May We Assist You?");
 		System.out.println("1 – Check out appliance \n"
@@ -76,7 +76,7 @@ public class ApplianceManager {
 				int quantity = appliance.getQuantity();
 				if(quantity > 0) {
 					appliance.setQuantity(quantity-1);
-					System.out.println("Appliance" + inputItemNumber +"has been checked out." );
+					System.out.println("Appliance " + "\""+ inputItemNumber+"\"" +" has been checked out." );
 				}
 				else {
 					System.out.println("The appliance is not available to be checked out.");
@@ -95,6 +95,7 @@ public class ApplianceManager {
 		System.out.println("Enter brand to search for:" );
 		boolean found = false;
 		String inputBrand = scanner.next();
+		System.out.println("\nMatching Appliances: ");
 		for(Appliance appliance : loadedAppliances) {
 			if(inputBrand.equalsIgnoreCase(appliance.getBrand())) {
 				found = true;
@@ -121,13 +122,18 @@ public class ApplianceManager {
 		case '1':
 			System.out.println("Enter number of doors: 2 (double door), 3 (three doors) or 4 (four doors):");
 			int inputNumOfDoors = scanner.nextInt();
+			boolean foundMatchingFrige = false;
 			for(Appliance appliance: loadedAppliances) {
 				//find frige
 				if(appliance instanceof Refrigerator) {
 					//change current appliance instance to the frige 
 					Refrigerator refrigerator = (Refrigerator) appliance;
 					if(inputNumOfDoors == refrigerator.getNumberOfDoors()) {
-						System.out.println("Matching refrigerators:");
+						if(!foundMatchingFrige) {
+							System.out.println("\nMatching refrigerators:\n");
+							foundMatchingFrige = true;
+						}
+						
 						System.out.println(refrigerator.toString());
 					}
 				}
@@ -136,13 +142,18 @@ public class ApplianceManager {
 		case '2':
 			System.out.println("Enter battery voltage value. 18 V (low) or 24 V (high) ");
 			int inputBatteryVoltage = scanner.nextInt();
+			boolean foundMatchingVacuum = false;
 			for(Appliance appliance: loadedAppliances) {
 				//find vacuum
 				if(appliance instanceof Vacuum) {
-					
 					Vacuum vacuum = (Vacuum) appliance;
 					if(inputBatteryVoltage == vacuum.getBatteryVoltage()) {
-						System.out.println("Matching vacuums:");
+						
+						if(!foundMatchingVacuum) {
+							System.out.println("\nMatching vacuums:\n");
+							foundMatchingVacuum = true;
+						}
+						
 						System.out.println(vacuum.toString());
 					}
 				}
@@ -151,12 +162,17 @@ public class ApplianceManager {
 		case '3':
 			System.out.println("Room where the microwave will be installed: K (kitchen) or W (work site):");
 			char inputRoomType = scanner.next().charAt(0);
+			boolean foundMatchingMicro = false;
 			for(Appliance appliance: loadedAppliances) {
 				if(appliance instanceof Microwave) {
 					Microwave microwave = (Microwave) appliance;
 					if(Character.toUpperCase(inputRoomType)==(microwave.getRoomType())
 							) {
-						System.out.println("Matching microwaves:");
+						if(!foundMatchingMicro) {
+							System.out.println("\nMatching microwaves:\n");
+							foundMatchingMicro = true;
+						}
+	
 						System.out.println(microwave.toString());
 					}
 				}
@@ -165,11 +181,16 @@ public class ApplianceManager {
 		case '4':
 			System.out.println("Enter the sound rating of the dishwasher: Qt (Quietest), Qr (Quieter), Qu(Quiet) or M (Moderate): ");
 			String inputSoundRating = scanner.next();
+			boolean foundMatchingDishwasher = false;
 			for(Appliance appliance: loadedAppliances) {
 				if(appliance instanceof Dishwasher) {
 					Dishwasher dishwasher = (Dishwasher) appliance;
 					if(inputSoundRating.equalsIgnoreCase(dishwasher.getSoundRating()) ) {
-						System.out.println("Matching dishwashers:");
+						if(!foundMatchingDishwasher) {
+							System.out.println("\nMatching dishwashers:\n");
+							foundMatchingDishwasher = true;
+						}
+						
 						System.out.println(dishwasher.toString());
 					}
 				}
@@ -185,6 +206,7 @@ public class ApplianceManager {
 			System.out.println(applianceLength);
 			System.out.println("Sorry. We only have"+" " + applianceLength + " "+"appliances");
 		}else {
+			System.out.println("\nRandom appliances:\n");
 		Random random = new Random();
 		//array list to store the number
 		for(int i = 0 ;i< inputNumber; i++ ) {

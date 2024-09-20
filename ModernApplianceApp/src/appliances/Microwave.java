@@ -22,6 +22,17 @@ public void setRoomType(char roomType) {
 	this.roomType = roomType;
 }
 
+public String displayRoomType() {
+	switch(getRoomType()) {
+	case 'W':
+		return "Work Site";
+	case 'K':
+		return "Kitchen";
+	default:
+		return "No room type matched";
+		
+	}
+}
 @Override
 public String saveToString() {
 		return String.format(
@@ -46,7 +57,7 @@ public String toString() {
 	+ "Color:"+ " " + getColor()+ "\n"
 	+"Price:" + " "+ getPrice() + "\n"
 	+ "Capacity:"+ " "+ capacity + "\n"
-	+"RoomType:"+ " " + roomType + "\n";
+	+"RoomType:"+ " " + displayRoomType() + "\n";
 	return information ;
 }
 }

@@ -22,7 +22,20 @@ private String soundRating;
 	public void setFeature(String feature) {
 		this.feature = feature;
 	}
-	
+	public String displaySoundRating() {
+		switch(getSoundRating()) {
+		case "Qt":
+			return "Quietest";
+		case "Qr":
+			return "Quieter";
+		case "Qu":
+			return "Quiet";
+		case "M":
+		return "Moderate";
+		default:
+			return "No sound rating macthed";
+		}
+	}
 	@Override
 	public String saveToString() {
 		return String.format(
@@ -47,7 +60,7 @@ private String soundRating;
 	+ "Color:" + " "+ getColor()+ "\n"
 	+"Price:" + " "+ getPrice() + "\n"
 	+"Feature:" + " "+ feature + "\n"
-	+ "SoundRating:"+ " " + soundRating + "\n";
+	+ "SoundRating:"+ " " + displaySoundRating() + "\n";
 		
 		return information ;
 	}
