@@ -1,5 +1,7 @@
 package shapes;
-
+/**
+ * Represent a cone object
+ */
 public class Cone extends Shape
 {
  private double radius;
