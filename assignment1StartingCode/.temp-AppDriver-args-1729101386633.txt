@@ -1,0 +1,12 @@
+-XX:+ShowCodeDetailsInExceptionMessages
+-agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:54394
+"-javaagent:C:\\Users\\lexie\\.eclipse\\org.eclipse.platform_4.32.0_1400478792_win32_win32_x86_64\\configuration\\org.eclipse.osgi\\251\\0\\.cp\\lib\\javaagent-shaded.jar"
+-Dfile.encoding=UTF-8
+-Dstdout.encoding=UTF-8
+-Dstderr.encoding=UTF-8
+-classpath
+"D:\\SAIT\\cprg304-java-workspace\\assignment1StartingCode\\bin;D:\\software\\eclipse\\plugins\\junit-jupiter-api_5.10.2.jar;D:\\software\\eclipse\\plugins\\junit-jupiter-engine_5.10.2.jar;D:\\software\\eclipse\\plugins\\junit-jupiter-migrationsupport_5.10.2.jar;D:\\software\\eclipse\\plugins\\junit-jupiter-params_5.10.2.jar;D:\\software\\eclipse\\plugins\\junit-platform-commons_1.10.2.jar;D:\\software\\eclipse\\plugins\\junit-platform-engine_1.10.2.jar;D:\\software\\eclipse\\plugins\\junit-platform-launcher_1.10.2.jar;D:\\software\\eclipse\\plugins\\junit-platform-runner_1.10.2.jar;D:\\software\\eclipse\\plugins\\junit-platform-suite-api_1.10.2.jar;D:\\software\\eclipse\\plugins\\junit-platform-suite-engine_1.10.2.jar;D:\\software\\eclipse\\plugins\\junit-platform-suite-commons_1.10.2.jar;D:\\software\\eclipse\\plugins\\junit-vintage-engine_5.10.2.jar;D:\\software\\eclipse\\plugins\\org.opentest4j_1.3.0.jar;D:\\software\\eclipse\\plugins\\org.apiguardian.api_1.1.2.jar;D:\\software\\eclipse\\plugins\\org.junit_4.13.2.v20230809-1000.jar;D:\\software\\eclipse\\plugins\\org.hamcrest_2.2.0.jar;D:\\software\\eclipse\\plugins\\org.hamcrest.core_2.2.0.v20230809-1000.jar"
+appDomain.AppDriver
+-fshapes1.txt
+-Tv
+-Sb
