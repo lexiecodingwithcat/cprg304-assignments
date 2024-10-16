@@ -19,14 +19,14 @@ import utilities.VolumeComparator;
 
 public class SortManager {
 
-	private static Shape[] shapeArr;
+	private static Shape[] shapes;
 	
  public SortManager(String[] args) {
-	 	loadShapes();
+	 	shapes = loadShapes();
 	 	BaseAreaComparator base = new BaseAreaComparator();
 	 	VolumeComparator vm = new VolumeComparator();
 	 	//bubble sort
-//	 	Sort.bubbleSort(shapeArr);
+	 	Sort.bubbleSort(shapes);
 //	 	Sort.bubbleSort(shapeArr, base);
 //	 	Sort.bubbleSort(shapeArr, vm);
 	 	
@@ -40,22 +40,27 @@ public class SortManager {
 //	 	Sort.selectionSort(shapeArr, base);
 //	 	Sort.selectionSort(shapeArr, vm);
 	 	
+	 	//merge sort
+//	 	Sort.mergeSort(shapeArr);
+//	 	Sort.mergeSort(shapeArr, base);
+//	 	Sort.mergeSort(shapeArr, vm);
+	 	
 	 	//quick Sort
 //	 	Sort.quickSort(shapeArr, 0, shapeArr.length-1);
-	 	Sort.quickSort(shapeArr, base, 0, shapeArr.length-1);
+//	 	Sort.quickSort(shapeArr, base, 0, shapeArr.length-1);
 //	 	Sort.quickSort(shapeArr, vm, 0, shapeArr.length-1);
 	 	
 	 	
  
- for (int j = 0; j < shapeArr.length; j++) {
-	    System.out.println(shapeArr[j]);
+ for (int j = 0; j < shapes.length; j++) {
+	    System.out.println(shapes[j]);
 	}
 	
  }
  
  
-public static void loadShapes() {
-	
+public static Shape[] loadShapes() {
+	Shape[] shapeArr = null;
 	File inputFile = new File("res/shapes1.txt");
 	try (Scanner sc = new Scanner(inputFile)) {
 		if(sc.hasNextLine()) {
@@ -106,6 +111,8 @@ public static void loadShapes() {
 		
 		e.printStackTrace();
 	}
+	
+	return shapeArr;
 
 }
 

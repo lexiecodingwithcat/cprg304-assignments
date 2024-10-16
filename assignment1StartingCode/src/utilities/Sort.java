@@ -106,7 +106,8 @@ public class Sort {
 	
 	
 //	Merge Sort
-	private static <T extends Comparable<? super T>> void merge(T[]array,T[]leftHalf, T[]rightHalf) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static void mergeComparable(Comparable[]array,Comparable[]leftHalf, Comparable[]rightHalf) {
 		int leftLength = leftHalf.length;
 		int rightLength = rightHalf.length;
 		
@@ -117,8 +118,7 @@ public class Sort {
 			if((leftHalf[left]).compareTo(rightHalf[right])>=0) {
 				array[arr]=leftHalf[left];
 				left++;
-			}
-			if((leftHalf[left]).compareTo(rightHalf[right])<=0) {
+			}else {
 				array[arr]=rightHalf[right];
 				right++;
 			}
@@ -136,8 +136,9 @@ public class Sort {
 			arr++;	
 		}
 	}
-	@SuppressWarnings("unchecked")
-	public static <T extends Comparable<? super T>>void mergeSort(T[] array){
+	
+	@SuppressWarnings({ "rawtypes" })
+	public static void mergeSort(Comparable[] array){
 		//divide arrays into parts array
 		int length = array.length;
 	
@@ -146,8 +147,8 @@ public class Sort {
 		}
 		int midIndex = length/2;
 		//create sub array
-		T[] leftHalf = (T[]) new Object[midIndex];
-		T[] rightHalf = (T[]) new Object[length-midIndex];
+		Comparable[] leftHalf = new Comparable[midIndex];
+		Comparable[] rightHalf = new Comparable[length-midIndex];
 		//put elements in array into sub arrays
 		for(int i = 0; i<midIndex;i++) {
 			leftHalf[i] = array[i];
@@ -157,11 +158,67 @@ public class Sort {
 		}
 		mergeSort(leftHalf);
 		mergeSort(rightHalf);
-		merge(array, leftHalf, rightHalf);
+		mergeComparable(array, leftHalf, rightHalf);
 
 	}
 	
-	//comparator??
+	//comparator
+	@SuppressWarnings("rawtypes")
+	private static void mergeComparator( Shape[]array,Comparator<Shape> comparator, Shape[] leftHalf, Shape[] rightHalf) {
+		int leftLength = leftHalf.length;
+		int rightLength = rightHalf.length;
+		
+		int left = 0;
+		int right = 0;
+		int arr = 0;
+		while(left<leftLength && right<rightLength) {
+			if(comparator.compare(leftHalf[left],rightHalf[right])>=0) {
+				array[arr]=leftHalf[left];
+				left++;
+			}else {
+				array[arr]=rightHalf[right];
+				right++;
+			}
+			arr++;
+		}
+		//clean up remaining elements in right/left half
+		while(left<leftLength) {
+			array[arr]=leftHalf[left];
+			left++;
+			arr++;
+		}
+		while(right<rightLength) {
+			array[arr]=rightHalf[right];
+			right++;
+			arr++;	
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static void mergeSort(Shape[] array, Comparator<Shape> comparator){
+		//divide arrays into parts array
+		int length = array.length;
+	
+		if(length <2) {
+			return;
+		}
+		int midIndex = length/2;
+		//create sub array
+		Shape[] leftHalf = new Shape[midIndex];
+		Shape[] rightHalf = new Shape[length-midIndex];
+		//put elements in array into sub arrays
+		for(int i = 0; i<midIndex;i++) {
+			leftHalf[i] = array[i];
+		}
+		for(int i = midIndex; i<length; i++) {
+			rightHalf[i-midIndex]= array[i];
+		}
+		mergeSort(leftHalf, comparator);
+		mergeSort(rightHalf, comparator);
+		mergeComparator(array, comparator, leftHalf, rightHalf);
+
+	}
+	
 	
 	
 	//Quick Sort
@@ -215,6 +272,9 @@ public static <T extends Comparable<? super T>> void quickSort(T[] array,Compara
 	quickSort(array, comparator, leftPointer+1, high );
 	
 	}
+
+//heap sort
+
 }
 
 
