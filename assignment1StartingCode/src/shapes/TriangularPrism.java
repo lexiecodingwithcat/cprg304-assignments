@@ -17,6 +17,14 @@ public class TriangularPrism extends Prism
 		return getSide()*getSide()*Math.sqrt(3)/4;
 	}
 
+	@Override
+	public String toString() {
+		return  "TriangularPrism---Height: " + getHeight() +
+		           ", Side: " + getSide() +
+		           ", Base Area: " + calcBaseArea() +
+		           ", Volume: " + calcVolume();
+	}
+
 	
 
 }

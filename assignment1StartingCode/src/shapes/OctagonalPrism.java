@@ -18,4 +18,12 @@ public class OctagonalPrism extends Prism
 		return getSide()*getSide()*2*(1+Math.sqrt(2));
 	}
 
+	@Override
+	public String toString() {
+		return "OctagonalPrism---Height: " + getHeight() +
+		           ", Side: " + getSide() +
+		           ", Base Area: " + calcBaseArea() +
+		           ", Volume: " + calcVolume();
+	}
+
 }

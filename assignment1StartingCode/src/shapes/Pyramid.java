@@ -38,6 +38,16 @@ public double calcVolume() {
 	return calcBaseArea()*getHeight()/3;
 }
 
+@Override
+public String toString() {
+	return "Pyramid---Height: " + getHeight() +
+	           ", Side: " + getSide() +
+	           ", Base Area: " + calcBaseArea() +
+	           ", Volume: " + calcVolume();
+}
+
+
+
 
 
 

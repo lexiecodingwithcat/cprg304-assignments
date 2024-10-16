@@ -44,9 +44,10 @@ public double calcVolume() {
 
 @Override
 public String toString() {
-	return "Cylinder [getRadius()=" + getRadius() + ", calcBaseArea()="
-			+ calcBaseArea() + ", calcVolume()=" + calcVolume()
-			+ ", getHeight()=" + getHeight() + "]";
+	return "Cylinder---Height: " + getHeight() +
+	           ", Radius: " + getRadius() +
+	           ", Base Area: " + calcBaseArea() +
+	           ", Volume: " + calcVolume();
 }
 
 }

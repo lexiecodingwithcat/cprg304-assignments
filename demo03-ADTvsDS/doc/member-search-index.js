@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"counterADT","c":"CounterADT","l":"decCounter()"},{"p":"counterADT","c":"CounterADT","l":"getCounter()"},{"p":"counterADT","c":"CounterADT","l":"incCounter()"},{"p":"counterADT","c":"CounterADT","l":"isZero()"},{"p":"counterADT","c":"CounterADT","l":"setCounter(int)"},{"p":"counterADT","c":"CounterADT","l":"toString()"}];updateSearchResults();

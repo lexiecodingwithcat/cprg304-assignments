@@ -24,13 +24,17 @@ public class Driver
 		studs.add( new Student( "Anderson", 34 ) );
 		studs.add( new Student( "Moore", 33 ) );
 
-		AgeComparator ac = new AgeComparator();
+	
 		System.out.println("before:");
 		System.out.println( studs );
+		
 		//sort the students by name
-		System.out.println("after:");
+		System.out.println("after sorting by name:");
 		Collections.sort(studs);
+		System.out.println( studs );
 		//sort the students by age
+		AgeComparator ac = new AgeComparator();
+		System.out.println("after sorting by age:");
 		Collections.sort(studs, ac);
 		System.out.println( studs );
 	}

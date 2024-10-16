@@ -4,7 +4,7 @@ public class SquarePrism extends Prism
 {
 
 	/**
-	 * Create a SquarePrism with sepcified height and side.
+	 * Create a SquarePrism with specified height and side.
 	 * @param height the height
 	 * @param side the side
 	 */
@@ -21,9 +21,10 @@ public class SquarePrism extends Prism
 
 	@Override
 	public String toString() {
-		return "SquarePrism [calcBaseArea()=" + calcBaseArea() + ", getSide()="
-				+ getSide() + ", calcVolume()=" + calcVolume()
-				+ ", getHeight()=" + getHeight() + "]";
+		return "SquarePrism---Height: " + getHeight() +
+		           ", Side: " + getSide() +
+		           ", Base Area: " + calcBaseArea() +
+		           ", Volume: " + calcVolume();
 	}
 
 	

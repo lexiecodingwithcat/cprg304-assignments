@@ -17,6 +17,14 @@ public class PentagonalPrism extends Prism
 		
 		return 5*getSide()*getSide()*Math.tan(Math.toRadians(54));
 	}
+
+	@Override
+	public String toString() {
+		return "PentagonalPrism---Height: " + getHeight() +
+		           ", Side: " + getSide() +
+		           ", Base Area: " + calcBaseArea() +
+		           ", Volume: " + calcVolume();
+	}
 	
 
 }

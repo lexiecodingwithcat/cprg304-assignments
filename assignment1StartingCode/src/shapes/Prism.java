@@ -39,5 +39,13 @@ public double calcVolume() {
 	return calcBaseArea()*getHeight();
 }
 
+@Override
+public String toString() {
+	return "Prism---Height: " + getHeight() +
+	           ", Side: " + getSide() +
+	           ", Base Area: " + calcBaseArea() +
+	           ", Volume: " + calcVolume();
+}
+
 
 }

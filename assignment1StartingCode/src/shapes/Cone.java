@@ -53,8 +53,10 @@ public double calcVolume() {
 
 @Override
 public String toString() {
-	return "Cone [getRadius()=" + getRadius() + ", calcBaseArea()="
-			+ calcBaseArea() + ", calcVolume()=" + calcVolume() + "]";
+	return "Cone---Height: " + getHeight() +
+	           ", Radius: " + getRadius() +
+	           ", Base Area: " + calcBaseArea() +
+	           ", Volume: " + calcVolume();
 }
 
 
