@@ -116,7 +116,7 @@ public SortManager(String[] args) {
  }
  
  
-public static void loadShapes(String fileName) {
+private static void loadShapes(String fileName) {
 	
 	File inputFile = new File(fileName);
 	try (Scanner sc = new Scanner(inputFile)) {
@@ -128,49 +128,39 @@ public static void loadShapes(String fileName) {
 			String[] elements= sc.nextLine().split(" ");
 			String shapeType=elements[0];
 			double height = Double.parseDouble(elements[1]);
-			switch(shapeType) {
-			case "Cone":
-				double radiusCone = Double.parseDouble(elements[2]);
-				shapes[i]= new Cone(height, radiusCone);
-				break;
-			case "Cylinder":
-				double radiusCy = Double.parseDouble(elements[2]);
-				shapes[i]= new Cylinder(height, radiusCy);
-				break;
-			case "Pyramid":
-				double lengthPy =  Double.parseDouble(elements[2]);
-				shapes[i]= new Pyramid(height, lengthPy);
-				break;
-			case "SquarePrism":
-				double lengthSq =  Double.parseDouble(elements[2]);
-				shapes[i]= new SquarePrism(height, lengthSq);
-				break;
-			case "TriangularPrism":
-				double lengthTr =  Double.parseDouble(elements[2]);
-				shapes[i]= new TriangularPrism(height, lengthTr);
-				break;
-			case "PentagonalPrism":
-				double lengthPe =  Double.parseDouble(elements[2]);
-				shapes[i]= new PentagonalPrism(height, lengthPe);
-				break;
-			case "OctagonalPrism":
-				double lengthOc =  Double.parseDouble(elements[2]);
-				shapes[i]= new OctagonalPrism(height, lengthOc);
-				break;
-			}		
+			double sideOrRadius = Double.parseDouble(elements[2]);
+			shapes[i] = createShape(shapeType, height, sideOrRadius);
 		}
-
 		}
 	} catch (FileNotFoundException e) {
-		
 		e.printStackTrace();
 	} catch (NumberFormatException e) {
-		
 		e.printStackTrace();
 	}
-	
-	
 
+}
+
+//create new shape
+private static Shape createShape(String shapeType, double height, double sideOrRadius) {
+	switch(shapeType) {
+	case "Cone":
+		return new Cone(height, sideOrRadius);
+	case "Cylinder":
+		return new Cylinder(height, sideOrRadius);
+	case "Pyramid":
+		return new Pyramid(height, sideOrRadius);
+	case "SquarePrism":
+		return new SquarePrism(height, sideOrRadius);
+	case "TriangularPrism":
+		return new TriangularPrism(height, sideOrRadius);
+	case "PentagonalPrism":
+		return new PentagonalPrism(height, sideOrRadius);
+	case "OctagonalPrism":
+		return new OctagonalPrism(height, sideOrRadius);
+		
+	}
+	return null;		
+	
 }
 
 
