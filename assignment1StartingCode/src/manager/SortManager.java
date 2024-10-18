@@ -20,7 +20,7 @@ import utilities.VolumeComparator;
 
 public class SortManager {
 
-	private static Shape[] shapes;
+//	private static Shape[] shapes;
 	
  
 public SortManager(String[] args) {
@@ -34,79 +34,40 @@ public SortManager(String[] args) {
 	 			if(arg.length()>2) {
 	 			fileName = arg.substring(2);
 	 			}else {
-	 				System.out.println("No file name provided after -f");
+	 				System.out.println("Error: No file name provided after -f");
 	 			}
 	 		}
 	 		if(arg.startsWith("-t")) {
 	 			if(arg.length()>2) {
 	 			sortType  = arg.substring(2);
 	 			}else {
-	 				System.out.println("No file name provided after -t");
+	 				System.out.println("Error: No file name provided after -t");
 	 			}
 	 		}
 	 		if(arg.startsWith("-s")) {
 	 			if(arg.length()>2) {
 	 			sortAlgorithm = arg.substring(2);
 	 			}else {
-	 				System.out.println("No sort algorithm provided after -s");
+	 				System.out.println("Error:No sort algorithm provided after -s");
 	 			}
 	 		}
 	 	}
-	 	
-	 	loadShapes(fileName);
-	 	Comparator<Shape> comparator = null;
-	 	switch(sortType) {
-	 	case "v":
-	 		comparator= new VolumeComparator();
-	 		break;
-	 	case "h":
-	 		comparator = null;
-	 		break;
-	 	case "a":
-	 		comparator = new BaseAreaComparator();
-	 		break;
-	 	}
-	 	System.err.println(sortAlgorithm);
-	 	switch(sortAlgorithm) {
-	 	case "b":
-	 		if(comparator == null) {
-	 			Sort.bubbleSort(shapes);
-	 		}else {
-	 			Sort.bubbleSort(shapes, comparator);
-	 		}
-	 		break;
-	 	case "s":
-	 		if(comparator ==null) {
-	 			Sort.selectionSort(shapes);
-	 		}else {
-	 			Sort.selectionSort(shapes, comparator);
-	 		}
-	 		break;
-	 	case "i":
-	 		if(comparator ==null) {
-	 			Sort.insertionSort(shapes);
-	 		}else {
-	 			Sort.insertionSort(shapes, comparator);
-	 		}
-	 		break;
-	 	case "m":
-	 		if(comparator ==null) {
-	 			Sort.mergeSort(shapes);
-	 		}else {
-	 			Sort.mergeSort(shapes, comparator);
-	 		}
-	 		break;
-	 	case "q":
-	 		if(comparator == null) {
-	 			Sort.quickSort(shapes, 0, shapes.length-1);
-	 		}else {
-	 			Sort.quickSort(shapes, comparator, 0, shapes.length-1);
-	 		}
-	 		break;
-	 	default:
-	 		System.out.println("Invalid sorting algorithm. Use 'b', 's', 'i', 'm', or 'q'.");
+	 	//check invalid sort type
+	 	if(!sortType.equals("v") && !sortType.equals("h") && sortType.equals("a")) {
+	 		System.out.println("Error: invalid sort type");
+	 		printUsage();
 	 		return;
 	 	}
+	 	//check invalid sort algorithm 
+	 	if(!sortAlgorithm.equals("b")&& !sortAlgorithm.equals("i")&& !sortAlgorithm.equals("s")&&!sortAlgorithm.equals("q")&&!sortAlgorithm.equals("m")) {
+	 		System.out.println("Error: invalid sort algorithm");
+	 		printUsage();
+	 		return;
+	 	}
+	 	
+	 	Shape[] shapes = loadShapes(fileName);
+	 	sortAndBenchMark(shapes, sortType, sortAlgorithm);
+
 	 	
  System.out.println("after sort:");
  for (int j = 0; j < shapes.length; j++) {
@@ -116,8 +77,8 @@ public SortManager(String[] args) {
  }
  
  
-private static void loadShapes(String fileName) {
-	
+private static Shape[] loadShapes(String fileName) {
+	Shape[] shapes = null;
 	File inputFile = new File(fileName);
 	try (Scanner sc = new Scanner(inputFile)) {
 		if(sc.hasNextLine()) {
@@ -137,6 +98,7 @@ private static void loadShapes(String fileName) {
 	} catch (NumberFormatException e) {
 		e.printStackTrace();
 	}
+	return shapes;
 
 }
 
@@ -161,6 +123,69 @@ private static Shape createShape(String shapeType, double height, double sideOrR
 	}
 	return null;		
 	
+}
+
+//sort the shapes 
+private static void sortAndBenchMark(Shape[] shapes, String sortType, String sortAlgorithm) {
+	
+	Comparator<Shape> comparator = null;
+	if(sortType =="h") {
+		switch(sortAlgorithm) {
+		case "b":
+			Sort.bubbleSort(shapes);
+			break;
+		case "i":
+			Sort.insertionSort(shapes);
+			break;
+		case "s":
+			Sort.selectionSort(shapes);
+			break;
+		case "q":
+			Sort.quickSort(shapes, 0, shapes.length-1);
+			break;
+		case "m":
+			Sort.mergeSort(shapes);
+			break;
+		}
+	}else {
+		switch(sortType) {
+		case "v": 
+			 comparator= new VolumeComparator();
+			 break;
+		case "a":
+			comparator = new BaseAreaComparator();
+			break;
+		}
+		switch(sortAlgorithm) {
+		case "b":
+			Sort.bubbleSort(shapes, comparator);
+			break;
+		case "i":
+			Sort.insertionSort(shapes, comparator);
+			break;
+		case "s":
+			Sort.selectionSort(shapes, comparator);
+			break;
+		case "q":
+			Sort.quickSort(shapes,comparator, 0, shapes.length-1);
+			break;
+		case "m":
+			Sort.mergeSort(shapes,comparator);
+			break;
+		}
+		
+	}
+
+}
+
+private static void printUsage() 
+{
+    System.out.println("Usage:");
+    System.out.println("java -jar Sort.jar -f<file_name> -t[v/h/a] -s[b/s/i/m/q/z]");
+    System.out.println("Options:");
+    System.out.println("-f or -F: specify the file name with path (e.g., -f\"res\\shapes1.txt\")");
+    System.out.println("-t or -T: specify 'v' for volume, 'h' for height, or 'a' for base area (e.g., -tH)");
+    System.out.println("-s or -S: specify sorting algorithm 'b' (bubble), 's' (selection), 'i' (insertion), 'm' (merge), 'q' (quick), 'z' (custom) (e.g., -sB)");
 }
 
 
