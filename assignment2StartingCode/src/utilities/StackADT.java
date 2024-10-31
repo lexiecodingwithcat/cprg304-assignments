@@ -1,5 +1,12 @@
 package utilities;
 
+import java.util.NoSuchElementException;
+
+/**
+ * The {@code StackADT} interface defines the basic operations of a stack data structure.
+ *
+ * @param <T> the type of elements held in this stack
+ */
 public interface StackADT<T> {
 	
 	/**The size method will return the current element count in the stack.
@@ -47,15 +54,16 @@ public interface StackADT<T> {
 	 * postcondition: The top element is removed and returned.
 	 * 
 	 * @return The element has been removed.
+	 * @throws NoSuchElementException if the stack is already empty.
 	 */
-	T pop();
+	T pop() throws NoSuchElementException;
 	
 	/** The peek method will return the top element in the stack without removing it.
 	 * 
 	 * precondition: Stack is not empty.
 	 * postcondition: Stack remains unchanged; returns the top element.
 	 * 
-	 * @retrun The top element in the stack.
+	 * @retrun The top element in the stack. 
 	 */
 	T peek();
 	
