@@ -53,7 +53,7 @@ public SortManager(String[] args) {
 	 		}
 	 	}
 	 	//check invalid sort type
-	 	if(!sortType.equals("v") && !sortType.equals("h") && sortType.equals("a")) {
+	 	if(!sortType.equals("v") && !sortType.equals("h") && !sortType.equals("a")) {
 	 		System.out.println("Error: invalid sort type");
 	 		printUsage();
 	 		return;
@@ -127,9 +127,12 @@ private static Shape createShape(String shapeType, double height, double sideOrR
 
 //sort the shapes 
 private static void sortAndBenchMark(Shape[] shapes, String sortType, String sortAlgorithm) {
-	
+	   if (shapes == null || shapes.length == 0) {
+	        throw new IllegalArgumentException("The shapes array is either null or empty");
+	    }
+
 	Comparator<Shape> comparator = null;
-	if(sortType =="h") {
+	if(sortType.equals("h")) {
 		switch(sortAlgorithm) {
 		case "b":
 			Sort.bubbleSort(shapes);
