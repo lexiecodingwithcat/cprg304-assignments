@@ -29,6 +29,17 @@ public interface StackADT<T> {
 	 */
 	boolean isEmpty();
 	
+	 /**
+     * The isFull method will check if the stack is full. An optional method for fixed size stack.
+     * 
+     * Precondition: There is no precondition.
+     * Postcondition: Returns {@code true} if the stack is full, {@code false} otherwise.
+     *
+     * @return {@code true} if the stack is full, {@code false} otherwise
+     */
+	boolean stackOverflow();
+	
+	
 	/** The clear method will remove all of the elements from the stack. This stack will be empty after
 	 * this call returns.
 	 * 
@@ -135,6 +146,8 @@ public interface StackADT<T> {
 	 * @throws NullPointerException If the specified array is {@code null}.
 	 */
 	T[] toArray(T[] copy) throws NullPointerException;
+	
+	
 	
 	/**
 	 * Returns an iterator over the elements in this stack, in proper sequence.

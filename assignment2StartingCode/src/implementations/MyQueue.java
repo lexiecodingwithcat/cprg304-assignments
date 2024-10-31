@@ -73,5 +73,15 @@ public class MyQueue<E> implements QueueADT<E>{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public int search(E element) throws NullPointerException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public boolean contains(E element) throws NullPointerException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
