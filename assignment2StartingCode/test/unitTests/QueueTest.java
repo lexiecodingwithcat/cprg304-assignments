@@ -535,7 +535,7 @@ public class QueueTest
 	  /**
 	  * Test method for 
 	  * {@link implementations.MyQueue#contains(java.lang.Object)}
-	  * to return true when item is not found.
+	  * to return false when item is not found.
 	  */@Test
 		public void testContains_NotFound()
 		{

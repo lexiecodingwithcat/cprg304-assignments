@@ -95,6 +95,34 @@ public interface QueueADT<E> {
 	 */
 	boolean equals(QueueADT<E> that);
 	
+	/**The search method will look for the specified element that has been passed in the queue.
+	 * 
+	 * precondition: Element to search is not null.
+	 * postcondition: Queue remains unchanged; returns index of element or -1 if not found.
+	 * 
+	 * @param element The element need to be searched
+	 * @return the index of the searched element if found.
+	 * @return -1 if the element is not found.
+	 * @throws NullPointerException If the element passed in is {@code null}. And queue implementation 
+	 *                              does not support having {@code null} elements.
+	 *                                                             
+	 */
+	int search(E element) throws NullPointerException;
+	
+	/**The contains method will search the stack to see whether it is contains the element passed in.
+	 * 
+	 * precondition: There is no precondition.
+	 * postcondition: Queue remains unchanged; returns true if element is found.
+	 * 
+	 * @param element The element need to be searched for
+	 * @return {@code true} if the collection contains the specified element,
+     *         {@code false} otherwise
+     * @throws NullPointerException If the element passed in is {@code null}. And queue implementation 
+	 *                              does not support having {@code null} elements.         
+	 */
+	boolean contains(E element) throws NullPointerException;
+	
+	
 	/**
 	 * The toArray method will return an array containing all of the elements in this queue in proper
 	 * sequence. Obeys the general contract of the {@code java.util.Collection.toArray()} method.
