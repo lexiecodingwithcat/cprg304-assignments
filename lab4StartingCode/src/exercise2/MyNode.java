@@ -1,59 +1,81 @@
 package exercise2;
 
-public class MyNode<E>
-{
+/**
+ * A node in a doubly linked list.
+ *
+ * @param <E> the type of elements held in this node
+ * 
+ * @author Tianzi Cui
+ * @version Nov 7, 2024
+ */
+public class MyNode<E> {
 
-	private E element;
-	private MyNode<E> next;
-	private MyNode<E> prev;
-	
-	public MyNode(E element) {
-		this.element = element;
-		this.next = null;
-		this.prev = null;
-	
-	}
+    private E element;
+    private MyNode<E> next;
+    private MyNode<E> prev;
 
-	/**
-	 * @return the element
-	 */
-	public E getElement() {
-		return element;
-	}
+    /**
+     * Constructs a new MyNode with the specified element.
+     *
+     * @param element the element to be stored in this node
+     */
+    public MyNode(E element) {
+        this.element = element;
+        this.next = null;
+        this.prev = null;
+    }
 
-	/**
-	 * @param element the element to set
-	 */
-	public void setElement(E element) {
-		this.element = element;
-	}
+    /**
+     * Returns the element stored in this node.
+     *
+     * @return the element in this node
+     */
+    public E getElement() {
+        return element;
+    }
 
-	/**
-	 * @return the next
-	 */
-	public MyNode<E> getNext() {
-		return next;
-	}
+    /**
+     * Sets the element for this node.
+     *
+     * @param element the element to set
+     */
+    public void setElement(E element) {
+        this.element = element;
+    }
 
-	/**
-	 * @param next the next to set
-	 */
-	public void setNext(MyNode<E> next) {
-		this.next = next;
-	}
+    /**
+     * Returns the next node in the list.
+     *
+     * @return the next node, or null if there is no next node
+     */
+    public MyNode<E> getNext() {
+        return next;
+    }
 
-	/**
-	 * @return the prev
-	 */
-	public MyNode<E> getPrev() {
-		return prev;
-	}
+    /**
+     * Sets the next node in the list.
+     *
+     * @param next the next node to set
+     */
+    public void setNext(MyNode<E> next) {
+        this.next = next;
+    }
 
-	/**
-	 * @param prev the prev to set
-	 */
-	public void setPrev(MyNode<E> prev) {
-		this.prev = prev;
-	}
+    /**
+     * Returns the previous node in the list.
+     *
+     * @return the previous node, or null if there is no previous node
+     */
+    public MyNode<E> getPrev() {
+        return prev;
+    }
 
+    /**
+     * Sets the previous node in the list.
+     *
+     * @param prev the previous node to set
+     */
+    public void setPrev(MyNode<E> prev) {
+        this.prev = prev;
+    }
 }
