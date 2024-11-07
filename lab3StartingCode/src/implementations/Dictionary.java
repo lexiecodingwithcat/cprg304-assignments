@@ -25,15 +25,36 @@ public class Dictionary<K,V> implements DictionaryADT<K,V>
 	private ArrayList<K> keys;
 	private ArrayList<V> values;
 	
+	 /**
+     * Constructs a dictionary with a specified initial capacity.
+     * If the size passed is less than or equal with zero, use the DEFAULT_SIEZ as its initial capacity.
+     *
+     * @param size the initial capacity of the dictionary
+     */
+	
 	public Dictionary(int size) {
-		int initialSize = size > 0 ? size : DEFAULT_SIZE;
-		keys = new ArrayList<K>(initialSize);
-		values = new ArrayList<V>(initialSize);
+		int capacity = size > 0 ? size : DEFAULT_SIZE;
+		keys = new ArrayList<K>(capacity);
+		values = new ArrayList<V>(capacity);
 	}
+	
+	 /**
+     * Constructs a dictionary with the default initial capacity.
+     */
 	public Dictionary() {
-	    this(DEFAULT_SIZE); // 调用 Dictionary(int size) 构造器，将默认大小 DEFAULT_SIZE 传入
+	    this(DEFAULT_SIZE); 
 	}
 
+	 /**
+     * Initializes the dictionary with a specified capacity.
+     * If the size passed is less than or equal with zero, use the DEFAULT_SIEZ as its initial capacity.
+     * 
+     * precondition: There is no precondition.
+     * postcondition: Dictionary is initialized with the specified size.
+     * 
+     * @param size the initial capacity of the dictionary.
+     * 
+     */
 	@Override
 	public void create(int size) {
 		int initialSize = size > 0 ? size : DEFAULT_SIZE;
@@ -43,12 +64,18 @@ public class Dictionary<K,V> implements DictionaryADT<K,V>
 	}
 	
 	
-    /**
-     * Inserts a key-value pair into the dictionary.
-     *
-     * @param key the key to insert
-     * @param value the value associated with the key
-     * @return 
+	 /**
+     * The insert method will insert a key-value pair into the dictionary.
+     * 
+     * precondition: {@code key} and {@code value} are not {@code null}, and {@code key} does not already exist.
+     * postcondition: The dictionary contains the new key-value pair.
+     * 
+     * @param key the key to insert.
+     * @param value the value associated with the key.
+     * @return {@code true} if the insertion is successful,
+     * 		   {@code false} otherwise.
+     * @throws DuplicateKeyException if the key already exists in the dictionary
+     * 
      */
 	@Override
 	public boolean insert(K key, V value) throws DuplicateKeyException {
@@ -63,10 +90,13 @@ public class Dictionary<K,V> implements DictionaryADT<K,V>
 
 	
 	 /**
-     * Removes the key-value pair associated with the specified key.
-     *
-     * @param key the key to remove
-	 * @return 
+     * The remove method will removes the key-value pair associated with the specified key.
+     * 
+     * precondition: {@code key} is not {@code null}.
+     * postcondition: The key-value pair associated with the specified key is removed from the dictionary.
+     * 
+     * @param key the key to remove.
+     * @return the value associated with the removed key, or {@code null} if the key is not found.
 
      */
 	@Override
@@ -74,21 +104,22 @@ public class Dictionary<K,V> implements DictionaryADT<K,V>
 		int index = keys.indexOf(key);
 		if(index == -1) return null;
 		keys.remove(index);
+		V value = values.get(index);
 		values.remove(index);
-		return values.get(index);
+		return value;
 		
 	}
 	
 	 /**
      * Updates the value associated with the specified key.
-     *
-     * @param key the key needs to be updated
-     * @param newValue the new value to associate with the key
-	 * @return 
-     * @throws NullPointerException if the key or new value is null
-     * @throws NoSuchElementException if the key is not found in the dictionary
+     * 
+     * precondition: {@code key} and {@code newValue} are not {@code null}, and {@code key} exists in the dictionary.
+     * postcondition: The dictionary contains the new value associated with the specified key.
+     * 
+     * @param key the key to update.
+     * @param newValue the new value to associate with the key.
+     * @return {@code true} if the update is successful, {@code false} if the key is not found.
      */
-	
 	@Override
 	public boolean update(K key, V newValue) {
 		int index = keys.indexOf(key);
@@ -97,13 +128,16 @@ public class Dictionary<K,V> implements DictionaryADT<K,V>
 		return true;
 	}
 	
-    /**
-     * Looks up the value associated with the specified key.
+	 /**
+     * The lookup method will look up the value associated with the specified key.
      *
-     * @param key the key whose associated value is to be looked up
-     * @return the value associated with the specified key
-     * @throws NullPointerException if the key is null
-     * @throws NoSuchElementException if the key is not found in the dictionary
+     * precondition: {@code key} is not {@code null} and already exists in the dictionary.
+     * postcondition: The dictionary remains unchanged; returns the value associated with the key.
+     * 
+     * @param key the key whose associated value is to be looked up.
+     * @return the value associated with the specified key, or {@code null} if the key is not found.
+     * @throws NullPointerException if the key is {@code null}
+     * 
      */
 	@Override
 	public V lookup(K key) {
