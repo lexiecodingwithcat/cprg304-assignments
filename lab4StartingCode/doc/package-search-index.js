@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"exercise1"},{"l":"exercise2"},{"l":"test"},{"l":"所有程序包","u":"allpackages-index.html"}];updateSearchResults();

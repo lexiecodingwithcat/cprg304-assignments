@@ -1,8 +1,12 @@
 package implementations;
 
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
 import utilities.Iterator;
 import utilities.ListADT;
 
+@SuppressWarnings("serial")
 public class MyArrayList<E> implements ListADT<E>{
 
 	//attributes
@@ -12,20 +16,19 @@ public class MyArrayList<E> implements ListADT<E>{
 	private int size;
 	
 	//default constructor
+	
 	@SuppressWarnings("unchecked")
 	public MyArrayList() {
 		array = (E[]) new Object[CAPACITY];
 	}
 	
 	//constructor
-	
-	
 	@Override
 	public int size() {
 		return size;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public void clear() {
 		size = 0;
@@ -34,17 +37,14 @@ public class MyArrayList<E> implements ListADT<E>{
 
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		if(index > size || index<0) throw new IndexOutOfBoundsException();
+		if(index > size || index< 0) throw new IndexOutOfBoundsException();
 		if(toAdd == null) throw new NullPointerException();
 		checkCapacity();
 		shiftToRight(index);
 		array[index] = toAdd;
 		size++;
-		
-		
 		return true;
 	}
-
 	private void shiftToRight(int index) {
 		// TODO Auto-generated method stub
 		for(int i = array.length-1; i>index;i--) {
@@ -52,7 +52,19 @@ public class MyArrayList<E> implements ListADT<E>{
 		}
 		
 	}
-
+	@SuppressWarnings("unchecked")
+	private void checkCapacity() {
+		if(size == array.length) {
+			E[] newArray = (E[]) new Object[array.length*2];
+			//copy old array to the new 
+			for(int i = 0; i< array.length; i++) {
+				newArray[i] = array[i];
+			}
+			//the attribute points to the new array
+			array = newArray;
+		}
+	}
+	
 	@Override
 	public boolean add(E toAdd) throws NullPointerException {
 		if( toAdd == null) {
@@ -65,80 +77,139 @@ public class MyArrayList<E> implements ListADT<E>{
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
-	private void checkCapacity() {
-		if(size == array.length) {
-			E[] newArray = (E[]) new Object[CAPACITY*2];
-			//copy old array to the new 
-			for(int i = 0; i< array.length; i++) {
-				newArray[i] = array[i];
-			}
-//			the attribute points to the new array
-			array = newArray;
-		}
-		
-	}
-
+	
 	@Override
-	public boolean addAll(ListADT<? extends E> toAdd)
-			throws NullPointerException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
+		if(toAdd == null) throw new NullPointerException();
+		checkCapacity();
+		for(int i = 0; i<toAdd.size();i++) {
+			array[size] = toAdd.get(i);
+			size++;
+			
+		}
+		return true;
 	}
 
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		if(index >= size || index<0) throw new IndexOutOfBoundsException();
+		
+		return array[index];
 	}
 
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+		if(index<0 || index >= size) throw new IndexOutOfBoundsException();
+		if(size>0) {
+			E element = array[index];
+			shiftToLeft(index);
+			size--;
+			return element;
+		}
 		return null;
 	}
-
+	private void shiftToLeft(int index) {
+		for(int i=index; i<size-1;i++) {
+			array[i] = array[i+1];
+		}
+		//set the last element to null
+		array[size-1] = null;
+		
+	}
+	
 	@Override
 	public E remove(E toRemove) throws NullPointerException {
-		// TODO Auto-generated method stub
+		if(toRemove == null) throw new NullPointerException();
+		for(int i =0; i<size; i++) {
+			if(array[i].equals(toRemove) ) {
+				E removedElement = array[i];
+				shiftToLeft(i);
+				size --;
+				return removedElement;	
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public E set(int index, E toChange)
-			throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+	public E set(int index, E toChange)throws NullPointerException, IndexOutOfBoundsException {
+		if(toChange == null) throw new NullPointerException();
+		if(index<0 || index>=size)throw new IndexOutOfBoundsException();
+		E prevElement = array[index];
+		array[index] = toChange;
+		return prevElement;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if(size == 0) return true;
 		return false;
 	}
 
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
-		// TODO Auto-generated method stub
+	if(toFind == null) throw new NullPointerException();
+	for(int i =0; i<size; i++) {
+		if(array[i].equals(toFind)) {
+			return true;
+		}
+	}
 		return false;
 	}
 
+	//copy current array into toHold
+	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray(E[] toHold) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+		if(toHold == null) throw new NullPointerException();
+		if(size>toHold.length) {
+			E[] newArr = (E[])new Object[size];
+			System.arraycopy(array, 0, newArr, 0, size);
+			return newArr;
+		
+		}
+		System.arraycopy(array, 0, toHold, 0, size);
+		return toHold;
 	}
 
+	
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] newArr = new Object[size];
+		System.arraycopy(array, 0, newArr, 0, size);
+	
+		return newArr;
 	}
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//anonymous class
+		return new Iterator<E>(){
+			private int currentIndex = 0;
+			@Override
+			public boolean hasNext() {
+				if(currentIndex < size-1) return true;
+				return false;
+			}
+
+			@Override
+			public E next() throws NoSuchElementException {
+				if(!hasNext()) throw new NoSuchElementException();
+				currentIndex++;
+				return array[currentIndex];
+			}
+			
+		} ;
+		
 	}
+	
+	
+	
+	
+	
+	
+
+
 
 }

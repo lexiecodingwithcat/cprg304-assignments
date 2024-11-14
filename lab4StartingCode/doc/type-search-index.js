@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"test","l":"Driver"},{"p":"exercise1","l":"MyAList"},{"p":"exercise2","l":"MyDList"},{"p":"exercise2","l":"MyNode"},{"l":"所有类和接口","u":"allclasses-index.html"}];updateSearchResults();

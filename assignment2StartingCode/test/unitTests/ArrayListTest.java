@@ -1254,7 +1254,7 @@ public class ArrayListTest
 			myList.add( i );
 		}
 
-		Integer[] returnArray = new Integer[400];;
+		Integer[] returnArray = new Integer[400];
 		returnArray = myList.toArray( returnArray );
 
 		assertArrayEquals( "Failed to convert list to array.", original, returnArray );
