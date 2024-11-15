@@ -164,9 +164,7 @@ public class MyArrayList<E> implements ListADT<E>{
 		if(toHold == null) throw new NullPointerException();
 		if(size>toHold.length) {
 			E[] newArr = (E[])new Object[size];
-			System.arraycopy(array, 0, newArr, 0, size);
-			return newArr;
-		
+			toHold = newArr;
 		}
 		System.arraycopy(array, 0, toHold, 0, size);
 		return toHold;
@@ -189,7 +187,7 @@ public class MyArrayList<E> implements ListADT<E>{
 			private int currentIndex = 0;
 			@Override
 			public boolean hasNext() {
-				if(currentIndex < size-1) return true;
+				if(currentIndex < size) return true;
 				return false;
 			}
 
