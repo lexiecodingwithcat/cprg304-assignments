@@ -1,6 +1,6 @@
 package implementations;
 
-import java.util.Arrays;
+
 import java.util.NoSuchElementException;
 
 import utilities.Iterator;
@@ -47,7 +47,7 @@ public class MyArrayList<E> implements ListADT<E>{
 	}
 	private void shiftToRight(int index) {
 		// TODO Auto-generated method stub
-		for(int i = array.length-1; i>index;i--) {
+		for(int i = size; i>index;i--) {
 			array[i] = array[i-1];
 		}
 		
@@ -142,8 +142,8 @@ public class MyArrayList<E> implements ListADT<E>{
 
 	@Override
 	public boolean isEmpty() {
-		if(size == 0) return true;
-		return false;
+	
+		return size==0;
 	}
 
 	@Override
@@ -163,8 +163,8 @@ public class MyArrayList<E> implements ListADT<E>{
 	public E[] toArray(E[] toHold) throws NullPointerException {
 		if(toHold == null) throw new NullPointerException();
 		if(size>toHold.length) {
-			E[] newArr = (E[])new Object[size];
-			toHold = newArr;
+//			E[] newArr = (E[])new Object[size];
+			toHold = (E[]) java.lang.reflect.Array.newInstance(toHold.getClass().getComponentType(), size);
 		}
 		System.arraycopy(array, 0, toHold, 0, size);
 		return toHold;
@@ -187,15 +187,16 @@ public class MyArrayList<E> implements ListADT<E>{
 			private int currentIndex = 0;
 			@Override
 			public boolean hasNext() {
-				if(currentIndex < size) return true;
-				return false;
+				return currentIndex<size;
 			}
 
 			@Override
 			public E next() throws NoSuchElementException {
 				if(!hasNext()) throw new NoSuchElementException();
+				E element = array[currentIndex];
 				currentIndex++;
-				return array[currentIndex];
+				return element;
+//				return array[currentIndex++];
 			}
 			
 		} ;

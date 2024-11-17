@@ -221,8 +221,8 @@ public class MyDLL<E> implements ListADT<E> {
 	public E[] toArray(E[] toHold) throws NullPointerException {
 		if(toHold == null) throw new NullPointerException();
 		if(size>toHold.length) {
-			E[] newArr = (E[]) new Object[size];
-			toHold = newArr;
+//			E[] newArr = (E[]) new Object[size];
+			toHold = (E[]) java.lang.reflect.Array.newInstance(toHold.getClass().getComponentType(), size);
 		}
 		MyDLLNode<E> currentNode = head;
 		for(int i = 0;i<size;i++) {

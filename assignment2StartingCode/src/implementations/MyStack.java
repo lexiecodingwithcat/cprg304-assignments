@@ -1,72 +1,140 @@
 package implementations;
 
+import java.util.EmptyStackException;
+
+import java.util.NoSuchElementException;
+
 import utilities.Iterator;
 import utilities.StackADT;
 
+@SuppressWarnings("serial")
 public class MyStack<E> implements StackADT<E>{
     //attributes
 	private MyArrayList<E> stack;
 	public MyStack() {
-		stack=new MyArrayList<>();
+		stack = new MyArrayList<>();
 	}
+	
 	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void push(E toAdd) throws NullPointerException {
+		if(toAdd == null) throw new NullPointerException();
+		stack.add(toAdd);
 	}
+	
 	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+	public E pop() throws EmptyStackException {
+	if(stack.isEmpty()) throw new EmptyStackException();
+		return stack.remove(stack.size()-1);
+	}
+	
+	@Override
+	public E peek() throws EmptyStackException {
+		if(stack.isEmpty()) throw new EmptyStackException();
+		return stack.get(stack.size()-1);
 	}
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		stack.clear();
 		
 	}
 	@Override
-	public void push(E element) {
-		// TODO Auto-generated method stub
+	public boolean isEmpty() {
+		return stack.size() ==0;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public E[] toArray(E[] holder) throws NullPointerException {
+		if(holder == null) throw new NullPointerException();
+		int size = stack.size();
+		if(size>holder.length) {
+//			E[] newArr = (E[])new Object[size];
+			holder = (E[]) java.lang.reflect.Array.newInstance(holder.getClass().getComponentType(), stack.size());
+		}
+		for(int i = 0; i<size; i++) {
+			holder[i]= stack.get(size-1-i);
+		}
+		return holder;
+	}
+	@Override
+	public boolean contains(E toFind) throws NullPointerException {
+		if(toFind == null) throw new NullPointerException();
 		
-	}
-	@Override
-	public E pop() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public E peek() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public boolean equals(StackADT<E> that) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public int search(E element) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public boolean contains(E element) {
-		// TODO Auto-generated method stub
-		return false;
+		return stack.contains(toFind);
 	}
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int size = stack.size();
+		Object[] newArr = new Object[size];
+		for(int i = 0; i<size; i++) {
+			newArr[i]= stack.get(size-1-i);
+		}
+		return newArr;
+
+		
 	}
+	
 	@Override
-	public E[] toArray(E[] copy) {
-		// TODO Auto-generated method stub
-		return null;
+	public int search(E toFind) {
+		if(toFind == null) throw new NullPointerException();
+		int index = -1;
+		int size = stack.size();
+		for(int i=0; i<size;i++) {
+			if(stack.get(i).equals(toFind)) {
+				index = size-i;
+			}
+		}
+		return index;
 	}
+	
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new Iterator<E>() {
+			private int currentIndex = stack.size()-1;
+			@Override
+			public boolean hasNext() {
+				return currentIndex>=0;
+			}
+
+			@Override
+			public E next() throws NoSuchElementException {
+				if(!hasNext()) throw new NoSuchElementException();
+				E element = stack.get(currentIndex);
+				currentIndex--;
+				return element;
+			}
+			
+		};
 	}
+	
+
+	@Override
+	public boolean equals(StackADT<E> that) {
+
+	if(this.size() != that.size()) return false;
+
+	Iterator<E> thisIterator = stack.iterator();
+	Iterator<E> thatIterator = that.iterator();
+	    
+	while (thisIterator.hasNext() && thatIterator.hasNext()) {
+	      if (!thisIterator.next().equals(thatIterator.next())) {
+	            return false; 
+	        }
+	 	}
+	return true;
+	}
+	
+	@Override
+	public int size() {
+		return stack.size();
+	}
+	
+	@Override
+	public boolean stackOverflow() {
+		
+		return false;
+	}
+	
 }

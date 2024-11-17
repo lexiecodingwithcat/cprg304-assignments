@@ -2,6 +2,7 @@ package unitTests;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
@@ -161,8 +162,9 @@ public class StackTest
 		stack2.push( one );
 		stack2.push( two );
 		stack2.push( three );
-
+		
 		boolean actual = stack.equals( stack2 );
+
 		assertEquals( "Failed to return true", expected, actual );
 	}
 
@@ -566,7 +568,7 @@ public class StackTest
 		array[1] = two;
 		array[2] = one;
 
-		Object[] returnArray = new Integer[3];;
+		Object[] returnArray = new Integer[3];
 		returnArray = stack.toArray();
 		assertArrayEquals( "Failed to convert to array.", array, returnArray );
 	}
@@ -590,7 +592,7 @@ public class StackTest
 		array[1] = two;
 		array[2] = one;
 
-		Integer[] returnArray = new Integer[3];;
+		Integer[] returnArray = new Integer[3];
 		returnArray = stack.toArray( returnArray );
 		assertArrayEquals( "Failed to return the correct array.", array, returnArray );
 	}
