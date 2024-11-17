@@ -115,7 +115,7 @@ public class MyStack<E> implements StackADT<E>{
 
 	if(this.size() != that.size()) return false;
 
-	Iterator<E> thisIterator = stack.iterator();
+	Iterator<E> thisIterator = this.iterator();
 	Iterator<E> thatIterator = that.iterator();
 	    
 	while (thisIterator.hasNext() && thatIterator.hasNext()) {
