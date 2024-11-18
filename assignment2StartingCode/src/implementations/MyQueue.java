@@ -5,18 +5,16 @@ package implementations;
 
 import java.util.NoSuchElementException;
 
-import utilities.EmptyQueueException;
+import exceptions.EmptyQueueException;
 import utilities.Iterator;
 import utilities.QueueADT;
 
-/**
- * 
- */
+
+@SuppressWarnings("serial")
 public class MyQueue<E> implements QueueADT<E>{
 	//attribute
 	private MyDLL<E> q;
-	private int size;
-	private int capacity;
+
 	
 	public MyQueue() {
 		q = new MyDLL<>();
@@ -25,25 +23,26 @@ public class MyQueue<E> implements QueueADT<E>{
 	@Override
 	public void enqueue(E toAdd) throws NullPointerException {
 		if(toAdd == null) throw new NullPointerException();
+		
 		q.add(toAdd);
 		
 	}
 
 	@Override
 	public E dequeue() throws EmptyQueueException {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) throw new EmptyQueueException();
+		return q.remove(0);
 	}
 
 	@Override
 	public E peek() throws EmptyQueueException {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) throw new EmptyQueueException();
+		return q.get(0);
 	}
 
 	@Override
 	public void dequeueAll() {
-		size =0;
+		
 		q.clear();
 		
 	}
@@ -51,7 +50,7 @@ public class MyQueue<E> implements QueueADT<E>{
 	@Override
 	public boolean isEmpty() {
 		
-		return size ==0 ;
+		return q.isEmpty();
 	}
 
 	@Override
@@ -74,38 +73,64 @@ public class MyQueue<E> implements QueueADT<E>{
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Iterator<E>() {
+
+			private int currentIndex = 0;
+			
+			@Override
+			public boolean hasNext() {
+				if(currentIndex < size()) return true;
+				return false;
+			}
+
+			@Override
+			public E next() throws NoSuchElementException {
+				if(!hasNext()) throw new NoSuchElementException();
+					return q.get(currentIndex++);
+					
+				
+			}
+			
+		};
 	}
 
 	@Override
 	public boolean equals(QueueADT<E> that) {
-		// TODO Auto-generated method stub
-		return false;
+		if(this.size() != that.size()) return false;
+
+		Iterator<E> thisIterator = this.iterator();
+		Iterator<E> thatIterator = that.iterator();
+		    
+		while (thisIterator.hasNext() && thatIterator.hasNext()) {
+		      if (!thisIterator.next().equals(thatIterator.next())) {
+		            return false; 
+		        }
+		 	}
+		return true;
+		
 	}
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		return q.toArray();
 	}
 
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+		if(holder == null) throw new NullPointerException();
+		return q.toArray(holder);
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		return size == capacity;
+		
+		return false;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return size;
+
+		return q.size();
 	}
 	
 
