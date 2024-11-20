@@ -263,7 +263,6 @@ public class MyDLL<E> implements ListADT<E> {
 					currentIndex++;
 					currentNode= currentNode.getNext();
 					return element;
-					
 				
 			}
 			
